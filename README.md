@@ -13,7 +13,7 @@ By hashing individual clauses and structuring them into a **Merkle tree**, we ca
 ## Why This Matters
 Legal contracts, smart contracts, audits—pretty much any agreement that relies on **integrity**—needs a way to prove it hasn’t been changed. Merkle trees help **track modifications with precision** while keeping verification **lightweight and efficient**.
 
-**How it Works:**
+**How it Works:**  
 ✅ **Even minor edits completely change the Merkle root**—so unauthorized modifications are easy to spot.  
 ✅ **Clause-level hashing ensures trust**—if a section is changed, it affects the **whole tree**, not just that line.  
 ✅ **Widely used in legal agreements, smart contracts, and audits**—ensuring authenticity without revealing private details.
@@ -78,26 +78,11 @@ streamlit run app.py
 5️⃣ **Clause-Level Comparison** → Identifies which **specific clauses** differ.  
 6️⃣ **Merkle Proofs** → Allows verification of **individual clauses** without exposing the full contract.  
 
-💡 _Example_:  
-```
-🔑 Merkle Root V1: abc123...
-🔑 Merkle Root V2: xyz456...
-🛡️ Contracts are different.
-🔎 Clause-Level Comparison:
-   Clause 2: ❌ Difference
-      🔹 V1: The seller provides a 1-year warranty.
-      🔹 V2: The seller provides a 2-year warranty.
-```
+**EXAMPLE 1:**  
+> <img alt="image" src="https://github.com/user-attachments/assets/cc34e125-1d07-4644-9358-7b75a7335825"  width="400px" height="auto" />
 
----
+**EXAMPLE 2:**  
+> <img alt="image" src="https://github.com/user-attachments/assets/d8ab77a2-cc7b-4082-8a9c-73e9852413e6"  width="400px" height="auto" />
 
-## Verify a Single Clause (Merkle Proof)
-If you need to check just **one clause**, use Merkle proofs:
-
-```python
-proof = get_merkle_proof(tree_v2, hashes_v2[1])  # Clause 2
-verified = verify_merkle_proof(proof, hashes_v2[1], root_v2)
-print("Proof Verification:", verified)  # ✅ True if Clause 2 is valid
-```
 
 ---

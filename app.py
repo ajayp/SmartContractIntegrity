@@ -52,6 +52,23 @@ if st.button("Compare Contracts"):
             st.write(f"**V1 Root:** `{root_v1}`")
             st.write(f"**V2 Root:** `{root_v2}`")
 
+            # --- Merkle Tree Visualization ---
+            st.subheader("Merkle Tree Visualizations")
+            viz_col1, viz_col2 = st.columns(2)
+
+            with viz_col1:
+                st.write("Contract V1 Tree")
+                tree_viz_v1 = cv.generate_merkle_tree_visualization(tree_v1, "Contract V1", clauses=clauses_v1)
+                if tree_viz_v1:
+                    st.graphviz_chart(tree_viz_v1)
+
+            with viz_col2:
+                st.write("Contract V2 Tree")
+                tree_viz_v2 = cv.generate_merkle_tree_visualization(tree_v2, "Contract V2", clauses=clauses_v2)
+                if tree_viz_v2:
+                    st.graphviz_chart(tree_viz_v2)
+            # --- End Visualization ---
+
             if cv.compare_merkle_roots(root_v1, root_v2):
                 st.success("✅ Contracts are IDENTICAL based on Merkle roots.")
             else:

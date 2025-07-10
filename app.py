@@ -1,7 +1,23 @@
 import streamlit as st
 import contractVerification as cv
 
-st.title("Contract Merkle Verification Demo")
+st.set_page_config(layout="wide")
+
+st.markdown(
+    """
+    <style>
+    [data-testid="stSidebar"] {
+        width: 400px !important;
+    }
+    .block-container {
+        padding-top: 1rem !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.header("Contract Merkle Verification Demo")
 
 st.sidebar.header("Load Sample Data")
 sample_names = [ds["name"] for ds in cv.SAMPLE_DATASETS]
@@ -23,7 +39,7 @@ st.sidebar.selectbox(
     on_change=load_sample
 )
 
-st.header("Enter Contract Texts")
+st.subheader("Enter Contract Texts")
 col1, col2 = st.columns(2)
 with col1:
     st.text_area("Contract Version 1", height=200, key="v1_text_content")
@@ -56,7 +72,6 @@ if st.button("Compare Contracts"):
             st.write(f"**V1 Root:** `{root_v1}`")
             st.write(f"**V2 Root:** `{root_v2}`")
 
-            # --- Merkle Tree Visualization ---
             st.subheader("Merkle Tree Visualizations")
             viz_col1, viz_col2 = st.columns(2)
 
@@ -71,7 +86,6 @@ if st.button("Compare Contracts"):
                 tree_viz_v2 = cv.generate_merkle_tree_visualization(tree_v2, "Contract V2", clauses=clauses_v2)
                 if tree_viz_v2:
                     st.graphviz_chart(tree_viz_v2)
-            # --- End Visualization ---
 
             if cv.compare_merkle_roots(root_v1, root_v2):
                 st.success("✅ Contracts are IDENTICAL based on Merkle roots.")

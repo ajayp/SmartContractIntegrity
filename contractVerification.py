@@ -230,7 +230,7 @@ def generate_merkle_tree_visualization(tree: List[List[str]], title: str, clause
 # --- Sample Data Sets ---
 SAMPLE_DATASETS = [
     {
-        "name": "Original Demo (Warranty Change & Typo)",
+        "name": "Warranty Change",
         "v1": """
 Clause 1: The buyer agrees to pay in full within 30 days.
 Clause 2: The seller provides a 1-year warranty.

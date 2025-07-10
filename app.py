@@ -26,11 +26,15 @@ st.sidebar.selectbox(
 st.header("Enter Contract Texts")
 col1, col2 = st.columns(2)
 with col1:
-    contract_text_v1 = st.text_area("Contract Version 1", height=200, key="v1_text_content")
+    st.text_area("Contract Version 1", height=200, key="v1_text_content")
 with col2:
-    contract_text_v2 = st.text_area("Contract Version 2", height=200, key="v2_text_content")
+    st.text_area("Contract Version 2", height=200, key="v2_text_content")
+
 
 if st.button("Compare Contracts"):
+    contract_text_v1 = st.session_state.v1_text_content
+    contract_text_v2 = st.session_state.v2_text_content
+
     if not contract_text_v1.strip() or not contract_text_v2.strip():
         st.warning("Please provide text for both contracts.")
     else:

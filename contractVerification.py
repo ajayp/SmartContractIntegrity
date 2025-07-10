@@ -81,10 +81,10 @@ def get_merkle_proof(tree: List[List[str]], target_hash: str) -> MerkleProof:
     if not tree or not tree[0]: # Ensure tree and leaf level are not empty
         return []
 
-    proof_revised: MerkleProof = []
+    proof: MerkleProof = []
     current_hash_up = target_hash
 
-    for level_index in range(len(tree) - 1): # Iterate up to the level before the root
+    for level_index in range(len(tree) - 1):  # Iterate up to the level before the root
         level = tree[level_index]
         found_in_level = False
         for i in range(0, len(level), 2):
@@ -95,19 +95,19 @@ def get_merkle_proof(tree: List[List[str]], target_hash: str) -> MerkleProof:
             if current_hash_up == left_node:
                 # Target is the left node, sibling is the right
                 # Append the sibling hash and its side ('right')
-                proof_revised.append((right_node, 'right'))
+                proof.append((right_node, 'right'))
                 # Compute the parent hash for the next iteration (left + right)
                 current_hash_up = hash_data(left_node + right_node)
                 found_in_level = True
-                break # Move to the next level up
+                break  # Move to the next level up
             elif current_hash_up == right_node:
                  # Target is the right node, sibling is the left
                  # Append the sibling hash and its side ('left')
-                 proof_revised.append((left_node, 'left'))
+                 proof.append((left_node, 'left'))
                  # Compute the parent hash for the next iteration (still left + right order as per build)
                  current_hash_up = hash_data(left_node + right_node)
                  found_in_level = True
-                 break # Move to the next level up
+                 break  # Move to the next level up
 
         if not found_in_level:
             # This means the current_hash_up was not found in the expected level.
@@ -117,7 +117,7 @@ def get_merkle_proof(tree: List[List[str]], target_hash: str) -> MerkleProof:
 
     # After the loop, current_hash_up should be the root.
     # The verification function will compare this computed root with the expected root.
-    return proof_revised
+    return proof
 
 
 def verify_merkle_proof(proof: MerkleProof, target_hash: str, merkle_root: str) -> bool:
@@ -201,6 +201,50 @@ Section C: Confidentiality.
     }
 ]
 
-# Default contract texts for app.py, taken from the first sample dataset
-contract_v1_default = SAMPLE_DATASETS[0]["v1"]
-contract_v2_default = SAMPLE_DATASETS[0]["v2"]
+if __name__ == '__main__':
+    # This block runs only when the script is executed directly (e.g., `python contractVerification.py`)
+    # It serves as a simple demonstration of the module's capabilities.
+    print("--- Running contractVerification.py as a standalone script ---")
+
+    # Use the first sample dataset for a quick demo
+    v1_text = SAMPLE_DATASETS[0]["v1"]
+    v2_text = SAMPLE_DATASETS[0]["v2"]
+
+    print("\n--- Contract V1 ---")
+    print(v1_text.strip())
+    print("\n--- Contract V2 ---")
+    print(v2_text.strip())
+
+    # 1. Extract clauses
+    clauses1 = extract_clauses(v1_text)
+    clauses2 = extract_clauses(v2_text)
+
+    # 2. Generate hashes and build trees
+    hashes1 = [hash_data(c) for c in clauses1]
+    tree1 = build_merkle_tree(hashes1)
+    root1 = get_merkle_root(tree1)
+
+    hashes2 = [hash_data(c) for c in clauses2]
+    tree2 = build_merkle_tree(hashes2)
+    root2 = get_merkle_root(tree2)
+
+    print(f"\n--- Merkle Roots ---")
+    print(f"V1 Root: {root1}")
+    print(f"V2 Root: {root2}")
+
+    # 3. Compare roots and report differences
+    if compare_merkle_roots(root1, root2):
+        print("\n✅ Result: Contracts are IDENTICAL.")
+    else:
+        print("\n❌ Result: Contracts are DIFFERENT.")
+        report = get_clause_comparison_report(hashes1, hashes2, clauses1, clauses2)
+        print("\n".join(report))
+
+    # 4. Demonstrate Merkle Proof generation and verification
+    if clauses1:
+        target_clause_hash = hashes1[0]
+        proof = get_merkle_proof(tree1, target_clause_hash)
+        is_valid = verify_merkle_proof(proof, target_clause_hash, root1)
+        print("\n--- Merkle Proof Demo ---")
+        print(f"Verifying first clause of V1...")
+        print(f"Proof is valid: {is_valid}")

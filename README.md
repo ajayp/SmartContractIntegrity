@@ -49,6 +49,22 @@ Comparing full contracts manually? Painful. Slow. Instead, we:
 - **Fast Auditing & Logging** – Easily track contract history for compliance.
 - **Blockchain & Legal Compatibility** – Works seamlessly for smart contracts and agreement tracking.  
 
+## How It Works
+### **Step-by-Step Breakdown**
+1️⃣ **Split the contract into individual clauses** → Each clause is **hashed separately**.  
+2️⃣ **Build a Merkle Tree** → Hashes are combined **layer by layer** until a **single root hash** remains.  
+3️⃣ **Any clause change alters the root** → Since **higher nodes depend on lower hashes**, modifications impact **the entire structure**.  
+4️⃣ **Compare Merkle roots** → Matching roots mean contracts are identical; if different, changes occurred.  
+5️⃣ **Clause-Level Comparison** → Identifies which **specific clauses** differ.  
+6️⃣ **Merkle Proofs** → Allows verification of **individual clauses** without exposing the full contract.  
+
+**EXAMPLE 1:**  
+> <img alt="Example 1 Screenshot" width="725" alt="image" src="https://github.com/user-attachments/assets/4ec71e8e-8749-4c1c-9e02-f90130cbfd73" width="400px"  />
+
+
+**EXAMPLE 2:**  
+> <img alt="Example 2 Screenshot with duplicate hash" src="https://github.com/user-attachments/assets/28cd7623-fd0e-41a8-a35c-aadef687d38a" width="400px" />
+
 ---
 
 ## Installation
@@ -78,23 +94,5 @@ Comparing full contracts manually? Painful. Slow. Instead, we:
  5. Browse to http://localhost:8501  
 
 ---
-
-## How It Works
-### **Step-by-Step Breakdown**
-1️⃣ **Split the contract into individual clauses** → Each clause is **hashed separately**.  
-2️⃣ **Build a Merkle Tree** → Hashes are combined **layer by layer** until a **single root hash** remains.  
-3️⃣ **Any clause change alters the root** → Since **higher nodes depend on lower hashes**, modifications impact **the entire structure**.  
-4️⃣ **Compare Merkle roots** → Matching roots mean contracts are identical; if different, changes occurred.  
-5️⃣ **Clause-Level Comparison** → Identifies which **specific clauses** differ.  
-6️⃣ **Merkle Proofs** → Allows verification of **individual clauses** without exposing the full contract.  
-
-**EXAMPLE 1:**  
-> <img alt="Example 1 Screenshot" width="725" alt="image" src="https://github.com/user-attachments/assets/4ec71e8e-8749-4c1c-9e02-f90130cbfd73" width="400px"  />
-
-
-**EXAMPLE 2:**  
-> <img alt="Example 2 Screenshot with duplicate hash" src="https://github.com/user-attachments/assets/28cd7623-fd0e-41a8-a35c-aadef687d38a" width="400px" />
-
-
 
 ---

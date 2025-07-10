@@ -51,21 +51,31 @@ Comparing full contracts manually? Painful. Slow. Instead, we:
 
 ---
 
-## Installation & Usage
+## Installation
 
-### 1️⃣ Install Dependencies
-Python 3.7+ and **Streamlit** are required.
+1. **Clone the repository:**
+    ```bash
+    git clone <repository_url>
+    cd <repository_name>
+    ```
 
-```bash
-pip install streamlit
-```
+ 2. **Create a Python virtual environment (recommended):**
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate  # On Windows: .\venv\Scripts\activate
+    ```
 
-### 2️⃣ Run the App
-Start the **interactive UI**:
+3. Install dependencies:
+   ```sh
+   pip install -r requirements.txt
+   ```
+   
+4. Run the demo:
+   ```sh
+   streamlit run app.py
+   ```
 
-```bash
-streamlit run app.py
-```
+ 5. Browse to http://localhost:8501  
 
 ---
 

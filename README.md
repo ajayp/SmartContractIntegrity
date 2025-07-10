@@ -89,10 +89,12 @@ Comparing full contracts manually? Painful. Slow. Instead, we:
 6️⃣ **Merkle Proofs** → Allows verification of **individual clauses** without exposing the full contract.  
 
 **EXAMPLE 1:**  
-> <img alt="image" src="https://github.com/user-attachments/assets/cc34e125-1d07-4644-9358-7b75a7335825"  width="400px" height="auto" />
+> <img alt="Example 1 Screenshot" width="725" alt="image" src="https://github.com/user-attachments/assets/4ec71e8e-8749-4c1c-9e02-f90130cbfd73" width="400px"  />
+
 
 **EXAMPLE 2:**  
-> <img alt="image" src="https://github.com/user-attachments/assets/d8ab77a2-cc7b-4082-8a9c-73e9852413e6"  width="400px" height="auto" />
+> <img alt="Example 2 Screenshot with duplicate hash" src="https://github.com/user-attachments/assets/28cd7623-fd0e-41a8-a35c-aadef687d38a" width="400px" />
+
 
 
 ---

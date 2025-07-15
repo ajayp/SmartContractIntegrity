@@ -1,5 +1,3 @@
-# SmartContractIntegrity (PoC)
-
 ## Overview
 This project is all about **securing contracts and agreements** using Merkle trees. Instead of manually comparing documents or relying on basic checksum methods, we use **cryptographic hashing** to make verification **fast, efficient, and tamper-proof**.
 
